@@ -17,6 +17,7 @@ import {
   Swords 
 } from 'lucide-react';
 import { ShadowSoldier } from '@/types/system';
+import { SystemInfoToggle } from '@/components/ui/SystemInfoToggle';
 
 export const ShadowArmyTab: React.FC = () => {
   const { shadowArmy, extractShadow, selectedShadow, setSelectedShadow } = useSystem();
@@ -53,10 +54,17 @@ export const ShadowArmyTab: React.FC = () => {
         icon={<Sparkles className="w-4 h-4 text-[#D43BFF]" />}
         variant="purple"
       >
-        <div className="border-b border-white/10 pb-3 mb-5 font-mono text-xs text-purple-200">
-          <p className="leading-relaxed">
-            [The Shadow Extraction protocol manifests completed habitual discipline into eternal supernatural soldiers. Each unbroken habit adds permanent combat power to your aura.]
-          </p>
+        <div className="border-b border-white/10 pb-3 mb-5">
+          <SystemInfoToggle
+            info="[The Shadow Extraction protocol manifests completed habitual discipline into eternal supernatural soldiers. Each unbroken habit adds permanent combat power to your aura.]"
+            title="SHADOW EXTRACTION PROTOCOL"
+            variant="purple"
+            headerLabel={
+              <div className="text-xs font-mono text-purple-300 uppercase tracking-wider">
+                LEGION FORMATION
+              </div>
+            }
+          />
         </div>
 
         {/* Soldiers Grid */}

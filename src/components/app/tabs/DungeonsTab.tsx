@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { DungeonGate } from '@/types/system';
 import { soundManager } from '@/lib/sound';
+import { SystemInfoToggle } from '@/components/ui/SystemInfoToggle';
 
 export const DungeonsTab: React.FC = () => {
   const { dungeons, player, setSelectedGate, setActiveModal } = useSystem();
@@ -36,10 +37,17 @@ export const DungeonsTab: React.FC = () => {
         icon={<Swords className="w-4 h-4 text-[#8B2CFF]" />}
         variant="purple"
       >
-        <div className="border-b border-white/10 pb-3 mb-5 font-mono text-xs text-slate-300">
-          <p className="leading-relaxed">
-            [Gates have manifested across local coordinates. Entering initiates an Instant Dungeon barrier that locks until the final boss entity is slain through high-intensity reps.]
-          </p>
+        <div className="border-b border-white/10 pb-3 mb-5">
+          <SystemInfoToggle
+            info="[Gates have manifested across local coordinates. Entering initiates an Instant Dungeon barrier that locks until the final boss entity is slain through high-intensity reps.]"
+            title="DIMENSIONAL GATE DIRECTIVE"
+            variant="purple"
+            headerLabel={
+              <div className="text-xs font-mono text-purple-300 uppercase tracking-wider">
+                DIMENSIONAL GATEWAYS
+              </div>
+            }
+          />
         </div>
 
         {/* Gates List */}
@@ -87,9 +95,14 @@ export const DungeonsTab: React.FC = () => {
                   ) : null}
                 </div>
 
-                <p className="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
-                  {gate.description}
-                </p>
+                <SystemInfoToggle
+                  info={gate.description}
+                  title={`GATE INTEL • ${gate.name}`}
+                  variant={gate.rank === 'S' || gate.rank === 'A' ? 'red' : 'blue'}
+                  className="mb-4"
+                  align="left"
+                  label="GATE INTEL"
+                />
 
                 {/* Boss & Rewards Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-black/60 border border-white/10 rounded font-mono text-xs mb-4">

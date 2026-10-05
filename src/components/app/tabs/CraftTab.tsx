@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { CraftItem } from '@/types/system';
 import { soundManager } from '@/lib/sound';
+import { SystemInfoToggle } from '@/components/ui/SystemInfoToggle';
 
 export const CraftTab: React.FC = () => {
   const { craftItems, craftItem, player } = useSystem();
@@ -56,10 +57,17 @@ export const CraftTab: React.FC = () => {
         icon={<FlaskConical className="w-4 h-4 text-[#1EA7FF]" />}
         variant="blue"
       >
-        <div className="border-b border-white/10 pb-3 mb-6 font-mono text-xs text-slate-300">
-          <p className="leading-relaxed">
-            [Combine elemental willpower shards harvested from completed quests to synthesize consumable recovery artifacts.]
-          </p>
+        <div className="border-b border-white/10 pb-3 mb-6">
+          <SystemInfoToggle
+            info="[Combine elemental willpower shards harvested from completed quests to synthesize consumable recovery artifacts.]"
+            title="ALCHEMY SYNTHESIS DIRECTIVE"
+            variant="blue"
+            headerLabel={
+              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                SYNTHESIS MATRIX
+              </div>
+            }
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">

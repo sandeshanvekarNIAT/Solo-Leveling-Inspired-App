@@ -6,6 +6,7 @@ import { SystemWindow } from '@/components/ui/SystemWindow';
 import { StatBar } from '@/components/ui/StatBar';
 import { RankBadge } from '@/components/ui/RankBadge';
 import { Users, Swords, Shield, Trophy, Flame } from 'lucide-react';
+import { SystemInfoToggle } from '@/components/ui/SystemInfoToggle';
 
 export const GuildTab: React.FC = () => {
   const { leaderboard, player } = useSystem();
@@ -19,10 +20,17 @@ export const GuildTab: React.FC = () => {
         icon={<Flame className="w-4 h-4 text-[#FF2D4B]" />}
         variant="red"
       >
-        <div className="border-b border-white/10 pb-3 mb-4 font-mono text-xs text-red-200">
-          <p>
-            [WORLD EVENT: The Dread Abyssal Drake has spawned. All Hunter Guilds are combining daily workout calories to deplete its dimensional barrier.]
-          </p>
+        <div className="border-b border-white/10 pb-3 mb-4">
+          <SystemInfoToggle
+            info="[WORLD EVENT: The Dread Abyssal Drake has spawned. All Hunter Guilds are combining daily workout calories to deplete its dimensional barrier.]"
+            title="WORLD RAID DIRECTIVE"
+            variant="red"
+            headerLabel={
+              <div className="text-xs font-mono text-red-400 uppercase tracking-wider">
+                DIMENSIONAL THREAT ALERT
+              </div>
+            }
+          />
         </div>
 
         <div className="p-4 bg-black/70 border border-red-900 rounded mb-4">

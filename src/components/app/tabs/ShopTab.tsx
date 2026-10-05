@@ -6,6 +6,7 @@ import { SystemWindow } from '@/components/ui/SystemWindow';
 import { SystemButton } from '@/components/ui/SystemButton';
 import { Coins, Sparkles, Palette, Shield, Music, Check } from 'lucide-react';
 import { ShopItem } from '@/types/system';
+import { SystemInfoToggle } from '@/components/ui/SystemInfoToggle';
 
 export const ShopTab: React.FC = () => {
   const { shopItems, buyShopItem, player } = useSystem();
@@ -29,10 +30,17 @@ export const ShopTab: React.FC = () => {
           </div>
         }
       >
-        <div className="border-b border-white/10 pb-3 mb-5 font-mono text-xs text-amber-200">
-          <p className="leading-relaxed">
-            [Cosmetic HUD overhauls, holographic frames, and vocal synthesizers. Earn gold solely through physical daily quest completions.]
-          </p>
+        <div className="border-b border-white/10 pb-3 mb-5">
+          <SystemInfoToggle
+            info="[Cosmetic HUD overhauls, holographic frames, and vocal synthesizers. Earn gold solely through physical daily quest completions.]"
+            title="ARMORY PROCUREMENT RULES"
+            variant="gold"
+            headerLabel={
+              <div className="text-xs font-mono text-amber-300 uppercase tracking-wider">
+                ARMORY REQUISITIONS
+              </div>
+            }
+          />
         </div>
 
         {/* Filter Bar */}

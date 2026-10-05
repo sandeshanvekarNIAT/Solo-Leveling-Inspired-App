@@ -13,8 +13,11 @@ import {
   Play, 
   Plus, 
   HeartHandshake, 
-  Gift 
+  Gift,
+  Info,
+  X
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { soundManager } from '@/lib/sound';
 
 export const QuestsTab: React.FC = () => {
@@ -30,6 +33,7 @@ export const QuestsTab: React.FC = () => {
 
   // Countdown timer to midnight
   const [secondsRemaining, setSecondsRemaining] = useState(dailyQuest.timeRemainingSeconds);
+  const [showQuestInfo, setShowQuestInfo] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -84,13 +88,66 @@ export const QuestsTab: React.FC = () => {
           </div>
         )}
 
-        <div className="border-b-2 border-double border-white/20 pb-2 mb-4">
-          <h2 className="font-orbitron font-extrabold text-base sm:text-lg text-white tracking-widest uppercase">
-            {dailyQuest.title}
-          </h2>
-          <p className="font-mono text-xs text-slate-300 mt-1">
-            {dailyQuest.description}
-          </p>
+        <div className="border-b-2 border-double border-white/20 pb-3 mb-4">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-orbitron font-extrabold text-base sm:text-lg text-white tracking-widest uppercase">
+              {dailyQuest.title}
+            </h2>
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playTick();
+                setShowQuestInfo(!showQuestInfo);
+              }}
+              title={showQuestInfo ? 'Hide directive details' : 'View directive details'}
+              aria-label={showQuestInfo ? 'Hide directive details' : 'View directive details'}
+              aria-expanded={showQuestInfo}
+              className={`p-1.5 rounded border transition-all flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1EA7FF] ${
+                showQuestInfo
+                  ? 'border-[#1EA7FF] bg-[#1EA7FF]/25 text-[#1EA7FF] shadow-[0_0_12px_#1EA7FF]'
+                  : 'border-white/10 hover:border-[#1EA7FF]/60 text-slate-400 hover:text-white bg-black/40'
+              }`}
+            >
+              <Info className="w-4 h-4" />
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {showQuestInfo && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                animate={{ opacity: 1, height: 'auto', marginTop: 10 }}
+                exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                className="overflow-hidden"
+              >
+                <div className="p-3.5 bg-[#040c1c]/95 border border-[#1EA7FF]/50 rounded text-xs font-mono text-[#7FD4FF] flex items-start justify-between gap-3 shadow-[0_0_15px_rgba(30,167,255,0.2)] chamfer-sm">
+                  <div className="flex items-start gap-2.5">
+                    <Info className="w-4 h-4 text-[#1EA7FF] shrink-0 mt-0.5" aria-hidden="true" />
+                    <div>
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-[#1EA7FF] mb-1">
+                        SYSTEM DIRECTIVE BRIEFING
+                      </div>
+                      <p className="leading-relaxed text-slate-200">
+                        {dailyQuest.description}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundManager.playTick();
+                      setShowQuestInfo(false);
+                    }}
+                    aria-label="Dismiss directive briefing"
+                    className="text-slate-400 hover:text-white p-1 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Action Button: Start Workout Mode */}
