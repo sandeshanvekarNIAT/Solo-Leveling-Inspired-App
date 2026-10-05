@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+:root {
+  --void: #02040A;
+  --panel: rgba(4, 12, 28, 0.78);
+  --system-blue: #1EA7FF;
+  --system-blue-soft: #7FD4FF;
+  --ice-white: #E8F6FF;
+  --monarch-purple: #8B2CFF;
+  --monarch-magenta: #D43BFF;
+  --danger-red: #FF2D4B;
+  --success-green: #38FF9A;
+  --gold: #FFC94A;
+  --rank-accent: #1EA7FF;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--void);
+    color: var(--ice-white);
+    font-family: 'Exo 2', 'Rajdhani', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Orbitron', 'Rajdhani', monospace, sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .font-orbitron {
+    font-family: 'Orbitron', monospace, sans-serif;
+  }
+
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .font-exo {
+    font-family: 'Exo 2', 'Rajdhani', sans-serif;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Glow Utilities */
+.glow-text {
+  text-shadow: 0 0 10px rgba(30, 167, 255, 0.7), 0 0 24px rgba(30, 167, 255, 0.35);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 10px rgba(139, 44, 255, 0.8), 0 0 26px rgba(139, 44, 255, 0.4);
+}
+
+.glow-text-red {
+  text-shadow: 0 0 10px rgba(255, 45, 75, 0.8), 0 0 26px rgba(255, 45, 75, 0.4);
+}
+
+.glow-text-green {
+  text-shadow: 0 0 10px rgba(56, 255, 154, 0.8), 0 0 24px rgba(56, 255, 154, 0.35);
+}
+
+.glow-text-gold {
+  text-shadow: 0 0 10px rgba(255, 201, 74, 0.75), 0 0 24px rgba(255, 201, 74, 0.35);
+}
+
+.glow-border {
+  box-shadow: 0 0 12px rgba(30, 167, 255, 0.4), 0 0 35px rgba(30, 167, 255, 0.15);
+}
+
+.glow-border-purple {
+  box-shadow: 0 0 14px rgba(139, 44, 255, 0.5), 0 0 45px rgba(139, 44, 255, 0.25);
+}
+
+.glow-border-red {
+  box-shadow: 0 0 16px rgba(255, 45, 75, 0.6), 0 0 45px rgba(255, 45, 75, 0.3);
+}
+
+/* Chamfered Edge Clip Paths */
+.chamfer-lg {
+  clip-path: polygon(
+    20px 0%,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0% calc(100% - 20px),
+    0% 20px
+  );
+}
+
+.chamfer-md {
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
+}
+
+.chamfer-sm {
+  clip-path: polygon(
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% calc(100% - 8px),
+    0% 8px
+  );
+}
+
+.chamfer-top-corners {
+  clip-path: polygon(
+    12px 0%,
+    calc(100% - 12px) 0%,
+    100% 12px,
+    100% 100%,
+    0% 100%,
+    0% 12px
+  );
+}
+
+/* Subtle Hexagonal & Diagonal Circuit Texture */
+.bg-circuit-grid {
+  background-image: 
+    linear-gradient(rgba(30, 167, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 167, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-circuit-purple {
+  background-image: 
+    linear-gradient(rgba(139, 44, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 44, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-scratches {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.012),
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+/* CRT Scanlines Overlay - Subtle atmospheric grain without text degradation */
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.15;
+}
+
+.vignette-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: radial-gradient(
+    circle at center,
+    transparent 45%,
+    rgba(2, 4, 10, 0.88) 100%
+  );
+}
+
+/* Custom System Cursor */
+@media (pointer: fine) {
+  .system-cursor-area {
+    cursor: crosshair;
+  }
+}
+
+/* Materialize Keyframes */
+@keyframes windowMaterialize {
+  0% {
+    transform: scale(0.96) translateY(6px);
+    opacity: 0;
+    filter: brightness(2) contrast(1.3);
+  }
+  35% {
+    opacity: 0.9;
+    filter: brightness(1.6);
+  }
+  45% {
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.animate-materialize {
+  animation: windowMaterialize 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Horizontal scan line sweep */
+@keyframes scanlineSweep {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+.scanline-sweep {
+  animation: scanlineSweep 2.2s ease-in-out infinite;
+}
+
+/* Energy Conduit Pulse */
+@keyframes conduitGlow {
+  0%, 100% {
+    opacity: 0.5;
+    box-shadow: 0 0 6px currentColor;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 16px currentColor, 0 0 28px currentColor;
+  }
+}
+
+.animate-conduit {
+  animation: conduitGlow 2.5s ease-in-out infinite;
+}
+
+/* Electric crackle flicker */
+@keyframes crackleFlash {
+  0%, 100% { opacity: 1; }
+  10% { opacity: 0.3; }
+  15% { opacity: 0.9; }
+  25% { opacity: 0.5; }
+  60% { opacity: 1; }
+  72% { opacity: 0.4; }
+  80% { opacity: 0.95; }
+}
+
+.animate-crackle {
+  animation: crackleFlash 4s steps(4) infinite;
+}
+
+/* Glitch Shake */
+@keyframes systemShake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 1px); }
+}
+
+.animate-glitch-shake {
+  animation: systemShake 0.25s ease-in-out;
+}
+
+/* Ripple for checkboxes */
+@keyframes successRipple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 255, 154, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgba(56, 255, 154, 0);
+  }
+}
+
+.animate-ripple {
+  animation: successRipple 0.5s ease-out;
+}
+
+/* 3D Barrel Cylinder Canvas & Transitions */
+.barrel-perspective-container {
+  perspective: 1400px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+}
+
+.barrel-surface {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-materialize,
+  .scanline-sweep,
+  .animate-conduit,
+  .animate-crackle,
+  .animate-glitch-shake {
+    animation: none !important;
+  }
+  .barrel-perspective-container {
+    perspective: none !important;
+  }
+}
